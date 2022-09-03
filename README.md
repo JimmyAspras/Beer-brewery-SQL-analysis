@@ -8,53 +8,64 @@ https://www.kaggle.com/nickhould/craft-cans
 ## Queries
 
 ### Display the number of offerings in descending order by state
+```
 SELECT br.state, count(b.name) AS "Number of Offerings"
 FROM breweries AS br, beer AS b
 WHERE b.brewery_id = br.brewery_id
 GROUP BY br.state
 ORDER BY "Number of Offerings" DESC;
+```
 
 <img width="622" alt="image" src="https://user-images.githubusercontent.com/72087263/188255184-48fe61a1-d5bb-48b7-8486-af801c59a93c.png">
 
 ### Display the number of breweries operating in each state and order by desc number
+```
 SELECT br.state, count(br.*) AS "Number of Breweries"
 FROM breweries AS br
 GROUP BY br.state
 ORDER BY "Number of Breweries" DESC;
+```
 
 <img width="616" alt="image" src="https://user-images.githubusercontent.com/72087263/188255199-d1d85c46-cab3-46a0-9841-0a35fed8d7fc.png">
 
 ### Display the number of beers by style and provide the average style abv in desc order
+```
 SELECT b.style, COUNT(*) AS "Number of Beer Offerings", ROUND(AVG(b.abv),3) AS "Average Style ABV",
 	ROUND(AVG(b.ibu)) AS "Average Style IBUs"
 FROM beer as b, breweries AS br
 WHERE b.brewery_id = br.brewery_id
 GROUP BY b.style
 ORDER BY "Average Style ABV" DESC;
+```
 
 <img width="624" alt="image" src="https://user-images.githubusercontent.com/72087263/188255221-a50bc73b-d589-4c8d-8ef7-188a519dcae3.png">
 
 ### Display the number of beers by style and and provid average style abv, list in desc order of offerings
+```
 SELECT b.style, COUNT(*) AS "Number of Beer Offerings", ROUND(AVG(b.abv),3) AS "Average Style ABV",
 	ROUND(AVG(b.ibu)) AS "Average Style IBUs"
 FROM beer as b, breweries AS br
 WHERE b.brewery_id = br.brewery_id
 GROUP BY b.style
 ORDER BY "Number of Beer Offerings" DESC;
+```
 
 <img width="620" alt="image" src="https://user-images.githubusercontent.com/72087263/188255242-c7f6d7c6-b71f-4e44-9ee7-dc9ecb457203.png">
 
-### #Display the number of beers by style and and provid average style abv, list in desc order of IBUs
+### Display the number of beers by style and and provide average style abv, list in desc order of IBUs
+```
 SELECT b.style, COUNT(*) AS "Number of Beer Offerings", ROUND(AVG(b.abv),3) AS "Average Style ABV",
 	ROUND(AVG(b.ibu)) AS "Average Style IBUs"
 FROM beer as b, breweries AS br
 WHERE b.brewery_id = br.brewery_id
 GROUP BY b.style
 ORDER BY "Average Style IBUs" DESC;
+```
 
 <img width="621" alt="image" src="https://user-images.githubusercontent.com/72087263/188255279-ee6f8f4c-b973-4bbf-aa7c-4a0a4ca342d5.png">
 
 ### Display the beer style, number of offerings, and average abv grouped by style. Omit IPAs, pilsners, and lagers and display only groups with >= 10% abv
+```
 SELECT b.style, COUNT(*) AS "Number of Beer Offerings", ROUND(AVG(b.abv),3) AS "Average Style ABV"
 FROM beer as b, breweries AS br
 WHERE b.brewery_id = br.brewery_id
@@ -69,10 +80,12 @@ AND b.id NOT IN
 GROUP BY b.style
 HAVING COUNT(*) >= 10
 ORDER BY "Number of Beer Offerings" DESC;
+```
 
 <img width="615" alt="image" src="https://user-images.githubusercontent.com/72087263/188255307-725f25d6-4f5f-470f-bbd7-89b875cb4e2b.png">
 
 ### Break the breweries down by region (West, Midwest, Southwest, Southeast, Northeast) and display the number of breweries in each region
+```
 SELECT *
 FROM
 	(
@@ -146,22 +159,27 @@ FROM
 	OR br.state LIKE '%NH%'
 	OR br.state LIKE '%ME%'
 	) AS "Northeast";
+```
 
 <img width="621" alt="image" src="https://user-images.githubusercontent.com/72087263/188255338-490b95d0-ac14-44f7-8d7d-a14d2058d1a2.png">
 
 ### Display the number of offerings by bottle size
+```
 SELECT b.ounces, COUNT(*) AS "Number Available"
 FROM beer AS b
 GROUP BY b.ounces;
+```
 
 <img width="507" alt="image" src="https://user-images.githubusercontent.com/72087263/188255383-cd72072c-a718-43ed-af44-a42aa114611f.png">
 
 ### Display the name, number of offerings, and average abv for each brewery and list in desc order of offerings
+```
 SELECT br.name, COUNT(b.id) AS "Number of Offerings", ROUND(AVG(b.abv),3) AS "Average ABV"
 FROM breweries AS br, beer AS b
 WHERE br.brewery_id = b.brewery_id
 GROUP BY br.name
 ORDER BY "Number of Offerings" DESC;
+```
 
 <img width="604" alt="image" src="https://user-images.githubusercontent.com/72087263/188255415-727bf228-7558-40ec-a71d-9e40182b718f.png">
 
